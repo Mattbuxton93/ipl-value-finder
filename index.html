@@ -894,18 +894,7 @@ function exportPicks(){
 renderMarkets();
 renderSlip();
 </script>
-<div style="background:#003a80;padding:6px 1.5rem;display:flex;align-items:center;gap:10px;border-top:1px solid rgba(255,255,255,.1)">
-  <span style="font-size:11px;color:rgba(255,255,255,.6);white-space:nowrap">Anthropic key for AI analysis:</span>
-  <input id="anthropic-key-input" type="password" placeholder="sk-ant-..." 
-    style="flex:1;max-width:380px;padding:3px 8px;border-radius:5px;border:none;font-size:12px;font-family:monospace;background:rgba(255,255,255,.15);color:#fff"
-    oninput="localStorage.setItem('ak',this.value)">
-  <span style="font-size:10px;color:rgba(255,255,255,.4)">Get free key at console.anthropic.com</span>
-</div>
-<script>
-window.addEventListener("load",function(){
-  var k=localStorage.getItem("ak");
-  if(k){var el=document.getElementById("anthropic-key-input");if(el)el.value=k;}
-});
-</script>
+
+
 </body>
 </html>
