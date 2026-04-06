@@ -698,7 +698,7 @@ const MARKETS = [
 let picks = [];
 let filters = {cat:'all', team:'all'};
 let sortBy = 'edge';
-let minEdge = 0;
+let minEdge = -999;
 function impliedProb(odds){ return 1/odds; }
 function calcEdge(m){ return (impliedProb(m.modelOdds) - impliedProb(m.bookieOdds)) * 100; }
 function edgeClass(e){ return e>=15?'edge-high':e>=6?'edge-med':e>=0?'edge-low':'edge-neg'; }
