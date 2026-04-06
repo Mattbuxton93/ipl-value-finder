@@ -175,7 +175,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     <button class="hn" onclick="setPage('data',this)">Data Guide</button>
   </div>
   <div class="hdr-right">
-    <span class="ai-badge">AI POWERED</span>
+    <span class="ai-badge"></span>
     <span class="markets-count" id="total-count">Loading...</span>
   </div>
 </div>
@@ -782,7 +782,7 @@ function renderMarkets(){
         </div>
       </div>
       <div class="mcard-foot">
-        <button class="ai-btn" onclick="toggleAI('${m.id}')">
+        <button class="ai-btn" >
           ${aiState&&aiState!=='loading'?'▾ Hide':'▸ AI'} analysis
         </button>
         <button class="add-btn${added?' added':e<0?' skip':''}" onclick="togglePick('${m.id}')">
