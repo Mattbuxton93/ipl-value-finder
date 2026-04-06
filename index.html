@@ -674,6 +674,7 @@ function edgeLabel(e){ return e>=15?'Strong value':e>=6?'Mild value':e>=0?'No ed
 
 function getFiltered(){
   let list = MARKETS.filter(m=>{
+    if(['wickets','dots','boundary','economy','powerplay','sr'].includes(m.category)) return false;
     if(filters.cat!=='all' && m.category!==filters.cat) return false;
     if(filters.team!=='all' && m.team!==filters.team) return false;
     if(calcEdge(m) < minEdge) return false;
