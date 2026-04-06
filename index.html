@@ -108,11 +108,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .add-btn.added{background:var(--green)}
 .add-btn.skip{background:#94a3b8}
 
-
-
-
-
-
+.ai-box{border-top:1px solid var(--border);padding:12px 14px;background:#f8faff;display:none;font-size:12.5px;line-height:1.65;color:var(--text)}
+.ai-box.open{display:block}
+.ai-box p{margin-bottom:8px}
+.ai-box p:last-child{margin-bottom:0}
+.thinking{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}
 .dots span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--muted);animation:dotpulse .8s infinite;margin:0 1px}
 .dots span:nth-child(2){animation-delay:.15s}
 .dots span:nth-child(3){animation-delay:.3s}
@@ -163,7 +163,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 .page{display:none}
 .page.active{display:block}
-.ai-box{display:none!important}.ai-btn{display:none!important}</style>
+.ai-row{display:none!important}.ai-box{display:none!important}button[onclick*="powerplay"],button[onclick*="'sr'"],button[onclick*="dots"],button[onclick*="boundary"],button[onclick*="wickets"],button[onclick*="economy"]{display:none!important}</style>
 </head>
 <body>
 
@@ -175,7 +175,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     <button class="hn" onclick="setPage('data',this)">Data Guide</button>
   </div>
   <div class="hdr-right">
-    <span class="ai-badge"></span>
+    <span class="ai-badge">AI POWERED</span>
     <span class="markets-count" id="total-count">Loading...</span>
   </div>
 </div>
@@ -457,6 +457,8 @@ let picks = [];
 let filters = {cat:'all', team:'all'};
 let sortBy = 'edge';
 let minEdge = -999;
+let aiOpen = {};
+
 function impliedProb(odds){ return 1/odds; }
 function calcEdge(m){ return (impliedProb(m.modelOdds) - impliedProb(m.bookieOdds)) * 100; }
 function edgeClass(e){ return e>=15?'edge-high':e>=6?'edge-med':e>=0?'edge-low':'edge-neg'; }
@@ -465,7 +467,6 @@ function edgeLabel(e){ return e>=15?'Strong value':e>=6?'Mild value':e>=0?'No ed
 function getFiltered(){
   let list = MARKETS.filter(m=>{
     if(m.category!=='runs' && m.category!=='match') return false;
-    if(['wickets','dots','boundary','economy','powerplay','sr'].includes(m.category)) return false;
     if(filters.cat!=='all' && m.category!==filters.cat) return false;
     if(filters.team!=='all' && m.team!==filters.team) return false;
     if(calcEdge(m) < minEdge) return false;
@@ -573,15 +574,63 @@ function renderMarkets(){
         </div>
       </div>
       <div class="mcard-foot">
-        <button class="ai-btn" >
+        <button class="ai-btn" onclick="toggleAI('${m.id}')">
           ${aiState&&aiState!=='loading'?'▾ Hide':'▸ AI'} analysis
         </button>
         <button class="add-btn${added?' added':e<0?' skip':''}" onclick="togglePick('${m.id}')">
           ${added?'✓ Added':e<0?'Skip (−ve edge)':'+ Add pick'}
         </button>
       </div>
+      <div class="ai-box${aiState?' open':''}" id="ai-${m.id}">${aiContent}</div>
     </div>`;
   }).join('');
+}
+
+function toggleAI(id){
+  if(aiOpen[id] && aiOpen[id]!=='loading'){
+    delete aiOpen[id];
+    renderMarkets(); return;
+  }
+  if(aiOpen[id]==='loading') return;
+  const m = MARKETS.find(x=>x.id===id);
+  const e = calcEdge(m).toFixed(1);
+  const modelProb = (impliedProb(m.modelOdds)*100).toFixed(1);
+  const bookieProb = (impliedProb(m.bookieOdds)*100).toFixed(1);
+  const statsStr = Object.entries(m.stats).map(([k,v])=>`${k}: ${v}`).join(' | ');
+  aiOpen[id]='loading';
+  renderMarkets();
+
+  const prompt = `You are an elite IPL cricket betting analyst specialising in finding value against bookmakers.
+
+Analyse this market:
+- Player: ${m.player} (${m.role}, ${m.team})
+- Match: ${getMatch(m.match).home} vs ${getMatch(m.match).away}
+- Market: ${m.market}
+- Bookie odds: ${m.bookieOdds.toFixed(2)} → implied probability ${bookieProb}%
+- Model true odds: ${m.modelOdds.toFixed(2)} → true probability ${modelProb}%
+- Value edge: ${e>=0?'+':''}${e}%
+- Stats: ${statsStr}
+- Signal: ${m.signal}
+
+Write a sharp 3-paragraph analysis:
+1. Why our model disagrees with the bookmaker and what specific data signals drive the edge
+2. Key risk factors or reasons this pick could fail
+3. Final verdict — rate this 1-5 stars and say whether to back it
+
+Be direct, data-driven, and brutally honest. Max 150 words total.`;
+
+  fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
+  })
+  .then(r=>r.json())
+  .then(data=>{
+    const txt = (data.content||[]).map(c=>c.text||'').join('');
+    aiOpen[id] = txt.split('\n').filter(l=>l.trim()).map(l=>`<p>${l}</p>`).join('');
+    renderMarkets();
+  })
+  .catch(()=>{ aiOpen[id]='<p style="color:#5c6b80">Analysis unavailable.</p>'; renderMarkets(); });
 }
 
 function togglePick(id){
@@ -639,7 +688,5 @@ function exportPicks(){
 renderMarkets();
 renderSlip();
 </script>
-
-
 </body>
 </html>
