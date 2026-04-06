@@ -163,41 +163,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 .page{display:none}
 .page.active{display:block}
-.ai-btn{display:none!important}.ai-box{display:none!important}.ai-btn{display:none!important}
-.market-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:12px}
-.market-card:hover{box-shadow:0 2px 12px rgba(0,0,0,.08)}
-.card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
-.match-label{font-size:11px;color:var(--muted);margin-bottom:6px}
-.player-row{display:flex;align-items:center;gap:10px}
-.player-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff}
-.player-info .name{font-size:16px;font-weight:700;color:var(--text)}
-.player-info .sub{font-size:12px;color:var(--muted)}
-.market-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-top:6px;background:#e8f0fe;color:#1a56db}
-.stats-row{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
-.stat-chip{background:#f1f5f9;border-radius:6px;padding:3px 8px;font-size:11px;color:var(--text)}
-.stat-chip b{font-weight:600}
-.model-line{font-size:12px;color:var(--text);margin-top:4px}
-.model-line .prob{font-weight:700;color:var(--green)}
-.odds-col{display:flex;flex-direction:column;gap:8px;min-width:120px;text-align:center}
-.odds-box{border-radius:8px;padding:8px 12px;border:1px solid var(--border)}
-.odds-box .label{font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--muted);text-transform:uppercase}
-.odds-box .val{font-size:22px;font-weight:800;color:var(--text)}
-.odds-box.model{background:#f0fdf4;border-color:#86efac}
-.odds-box.model .val{color:var(--green)}
-.edge-box{border-radius:8px;padding:8px 12px;text-align:center;border:1px solid var(--border)}
-.edge-box .label{font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--muted);text-transform:uppercase}
-.edge-box .val{font-size:20px;font-weight:800}
-.edge-box .desc{font-size:10px;margin-top:2px}
-.edge-pos{background:#f0fdf4;border-color:#86efac}.edge-pos .val{color:var(--green)}
-.edge-strong{background:#dcfce7;border-color:#4ade80}.edge-strong .val{color:#16a34a}
-.edge-neg{background:#fef2f2;border-color:#fca5a5}.edge-neg .val{color:#dc2626}
-.edge-none{background:#f8faff;border-color:var(--border)}.edge-none .val{color:var(--muted)}
-.card-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)}
-.add-btn{padding:7px 16px;border-radius:8px;border:none;font-size:12px;font-weight:600;cursor:pointer;background:var(--primary);color:#fff}
-.add-btn.added{background:var(--green)}
-.add-btn.skip{background:#94a3b8}
-.ai-box{display:none}
-</style>
+.ai-box{display:none!important}.ai-btn{display:none!important}</style>
 </head>
 <body>
 
@@ -500,7 +466,6 @@ function getFiltered(){
   let list = MARKETS.filter(m=>{
     if(m.category!=='runs' && m.category!=='match') return false;
     if(['wickets','dots','boundary','economy','powerplay','sr'].includes(m.category)) return false;
-    if(['wickets','dots','boundary','economy','powerplay','sr'].includes(m.category)) return false;
     if(filters.cat!=='all' && m.category!==filters.cat) return false;
     if(filters.team!=='all' && m.team!==filters.team) return false;
     if(calcEdge(m) < minEdge) return false;
@@ -674,8 +639,6 @@ function exportPicks(){
 renderMarkets();
 renderSlip();
 </script>
-
-
 
 
 </body>
