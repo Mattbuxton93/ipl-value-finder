@@ -163,7 +163,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 .page{display:none}
 .page.active{display:block}
-.ai-row{display:none!important}.ai-box{display:none!important}button[onclick*="powerplay"],button[onclick*="'sr'"],button[onclick*="dots"],button[onclick*="boundary"],button[onclick*="wickets"],button[onclick*="economy"]{display:none!important}</style>
+.ai-row{display:none!important}.ai-box{display:none!important}.ai-btn{display:none!important}button[onclick*="powerplay"],button[onclick*="'sr'"],button[onclick*="dots"],button[onclick*="boundary"],button[onclick*="wickets"],button[onclick*="economy"]{display:none!important}</style>
 </head>
 <body>
 
@@ -456,7 +456,7 @@ const MARKETS = [
 let picks = [];
 let filters = {cat:'all', team:'all'};
 let sortBy = 'edge';
-let minEdge = -999;
+let minEdge = 0;
 let aiOpen = {};
 
 function impliedProb(odds){ return 1/odds; }
