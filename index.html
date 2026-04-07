@@ -538,7 +538,7 @@ function renderMarkets(){
     const aiState = aiOpen[m.id];
     const modelProb = (impliedProb(m.modelOdds)*100).toFixed(1);
     const bookieProb = (impliedProb(m.bookieOdds)*100).toFixed(1);
-    const statsChips = Object.entries(m.stats).map(([k,v])=>`<div class="stat-chip"><span>${k}:</span> <b>${v}</b></div>`).join('');
+    const statsChips = Object.entries(m.stats).filter(([k])=>k!=='form').map(([k,v])=>`<div class="stat-chip"><span>${k}:</span> <b>${v}</b></div>`).join('');
 
     let aiContent = '';
     if(aiState==='loading'){
