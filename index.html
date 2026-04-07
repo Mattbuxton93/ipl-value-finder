@@ -377,8 +377,6 @@ function getMatch(id){ return MATCHES.find(m=>m.id===id); }
 // Edge is auto-calculated: (1/modelOdds - 1/bookieOdds) * 100
 
 const MARKETS = [
-  {id:"rr_win_g1",player:"RR to win",team:"RR",match:"g1",category:"match",market:"Match winner",bookieOdds:2.25,modelOdds:1.82,stats:{"h2h": "4/6", "win%": "66.7%"},signal:"Won 4 of 6 meetings (66.7%)."},
-  {id:"mi_win_g1",player:"MI to win",team:"MI",match:"g1",category:"match",market:"Match winner",bookieOdds:1.63,modelOdds:2.22,stats:{"h2h": "1/6", "win%": "33.3%"},signal:"Won 1 of 6 meetings (33.3%)."},
   {id:"ybk_jaiswal_r50_g1",player:"YBK Jaiswal",team:"RR",match:"g1",category:"runs",market:"Score 50+ runs",bookieOdds:3.3,modelOdds:2.67,stats:{"avg": "47.0", "sr": "177.0", "inn": "11", "ctx": "vs:MI"},signal:"27.3% hit rate (11 inn). Avg 47.0, SR 177.0"},
   {id:"ybk_jaiswal_r75_g1",player:"YBK Jaiswal",team:"RR",match:"g1",category:"runs",market:"Score 75+ runs",bookieOdds:3.3,modelOdds:2.67,stats:{"avg": "47.0", "sr": "177.0", "inn": "11", "ctx": "vs:MI"},signal:"27.3% hit rate (11 inn). Avg 47.0, SR 177.0"},
   {id:"ybk_jaiswal_r30_g1",player:"YBK Jaiswal",team:"RR",match:"g1",category:"runs",market:"Score 30+ runs",bookieOdds:2.04,modelOdds:2.35,stats:{"avg": "47.0", "sr": "177.0", "inn": "11", "ctx": "vs:MI"},signal:"36.4% hit rate (11 inn). Avg 47.0, SR 177.0"},
@@ -411,8 +409,6 @@ const MARKETS = [
   {id:"hh_pandya_r40_g1",player:"HH Pandya",team:"MI",match:"g1",category:"runs",market:"Score 40+ runs",bookieOdds:2.9,modelOdds:3.33,stats:{"avg": "66.4", "sr": "172.8", "inn": "18", "ctx": "vs:RR"},signal:"27.8% hit rate (18 inn). Avg 66.4, SR 172.8"},
   {id:"naman_dhir_r30_g1",player:"Naman Dhir",team:"MI",match:"g1",category:"runs",market:"Score 30+ runs",bookieOdds:3.57,modelOdds:4.1,stats:{"avg": "28.5", "sr": "181.6", "inn": "41", "ctx": "all"},signal:"24.4% hit rate (41 inn). Avg 28.5, SR 181.6"},
   {id:"naman_dhir_r40_g1",player:"Naman Dhir",team:"MI",match:"g1",category:"runs",market:"Score 40+ runs",bookieOdds:8.87,modelOdds:10.2,stats:{"avg": "28.5", "sr": "181.6", "inn": "41", "ctx": "all"},signal:"9.8% hit rate (41 inn). Avg 28.5, SR 181.6"},
-  {id:"dc_win_g2",player:"DC to win",team:"DC",match:"g2",category:"match",market:"Match winner",bookieOdds:1.76,modelOdds:1.82,stats:{"h2h": "3/4", "win%": "75.0%"},signal:"Won 3 of 4 meetings (75.0%)."},
-  {id:"gt_win_g2",player:"GT to win",team:"GT",match:"g2",category:"match",market:"Match winner",bookieOdds:2.05,modelOdds:2.22,stats:{"h2h": "1/4", "win%": "25.0%"},signal:"Won 1 of 4 meetings (25.0%)."},
   {id:"kl_rahul_r50_g2",player:"KL Rahul",team:"DC",match:"g2",category:"runs",market:"Score 50+ runs",bookieOdds:2.7,modelOdds:2.35,stats:{"avg": "60.3", "sr": "141.6", "inn": "9", "ctx": "vs:GT"},signal:"33.3% hit rate (9 inn). Avg 60.3, SR 141.6"},
   {id:"kl_rahul_r75_g2",player:"KL Rahul",team:"DC",match:"g2",category:"runs",market:"Score 75+ runs",bookieOdds:2.7,modelOdds:2.67,stats:{"avg": "60.3", "sr": "141.6", "inn": "9", "ctx": "vs:GT"},signal:"22.2% hit rate (9 inn). Avg 60.3, SR 141.6"},
   {id:"kl_rahul_r30_g2",player:"KL Rahul",team:"DC",match:"g2",category:"runs",market:"Score 30+ runs",bookieOdds:1.65,modelOdds:1.9,stats:{"avg": "60.3", "sr": "141.6", "inn": "9", "ctx": "vs:GT"},signal:"55.6% hit rate (9 inn). Avg 60.3, SR 141.6"},
@@ -450,8 +446,6 @@ const MARKETS = [
   {id:"n_pooran_r40_g3",player:"N Pooran",team:"LSG",match:"g3",category:"runs",market:"Score 40+ runs",bookieOdds:1.93,modelOdds:2.22,stats:{"avg": "44.6", "sr": "172.2", "inn": "14", "ctx": "vs:KKR"},signal:"42.9% hit rate (14 inn). Avg 44.6, SR 172.2"},
   {id:"kh_pandya_r30_g3",player:"KH Pandya",team:"LSG",match:"g3",category:"runs",market:"Score 30+ runs",bookieOdds:5.81,modelOdds:6.68,stats:{"avg": "19.4", "sr": "123.6", "inn": "16", "ctx": "vs:KKR"},signal:"6.2% hit rate (16 inn). Avg 19.4, SR 123.6"},
   {id:"kh_pandya_r40_g3",player:"KH Pandya",team:"LSG",match:"g3",category:"runs",market:"Score 40+ runs",bookieOdds:5.81,modelOdds:6.68,stats:{"avg": "19.4", "sr": "123.6", "inn": "16", "ctx": "vs:KKR"},signal:"6.2% hit rate (16 inn). Avg 19.4, SR 123.6"},
-  {id:"pbks_win_g4",player:"PBKS to win",team:"PBKS",match:"g4",category:"match",market:"Match winner",bookieOdds:1.72,modelOdds:99.0,stats:{"h2h": "0/2", "win%": "0.0%"},signal:"Won 0 of 2 meetings (0.0%)."},
-  {id:"srh_win_g4",player:"SRH to win",team:"SRH",match:"g4",category:"match",market:"Match winner",bookieOdds:2.1,modelOdds:1.01,stats:{"h2h": "2/2", "win%": "100.0%"},signal:"Won 2 of 2 meetings (100.0%)."},
   {id:"priyansh_arya_r50_g4",player:"Priyansh Arya",team:"PBKS",match:"g4",category:"runs",market:"Score 50+ runs",bookieOdds:3.4,modelOdds:4.88,stats:{"avg": "28.5", "sr": "178.6", "inn": "39", "ctx": "all"},signal:"20.5% hit rate (39 inn). Avg 28.5, SR 178.6"},
   {id:"priyansh_arya_r75_g4",player:"Priyansh Arya",team:"PBKS",match:"g4",category:"runs",market:"Score 75+ runs",bookieOdds:3.4,modelOdds:19.61,stats:{"avg": "28.5", "sr": "178.6", "inn": "39", "ctx": "all"},signal:"5.1% hit rate (39 inn). Avg 28.5, SR 178.6"},
   {id:"priyansh_arya_r30_g4",player:"Priyansh Arya",team:"PBKS",match:"g4",category:"runs",market:"Score 30+ runs",bookieOdds:2.83,modelOdds:3.25,stats:{"avg": "28.5", "sr": "178.6", "inn": "39", "ctx": "all"},signal:"30.8% hit rate (39 inn). Avg 28.5, SR 178.6"},
@@ -481,7 +475,7 @@ const MARKETS = [
 let picks = [];
 let filters = {cat:'all', team:'all'};
 let sortBy = 'edge';
-let minEdge = 0;
+let minEdge = -999;
 let aiOpen = {};
 
 function impliedProb(odds){ return 1/odds; }
@@ -491,6 +485,7 @@ function edgeLabel(e){ return e>=15?'Strong value':e>=6?'Mild value':e>=0?'No ed
 
 function getFiltered(){
   let list = MARKETS.filter(m=>{
+    if(m.category!=='runs' && m.category!=='match') return false;
     if(m.category!=='runs' && m.category!=='match') return false;
     if(filters.cat!=='all' && m.category!==filters.cat) return false;
     if(filters.team!=='all' && m.team!==filters.team) return false;
